@@ -1,6 +1,5 @@
 import Image from "next/image"
 import styles from './styles.module.css'
-import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 
 export default function WelcomeStep() {
