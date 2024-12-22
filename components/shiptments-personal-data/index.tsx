@@ -1,3 +1,4 @@
+import useRedeemsDispatch from "@/hooks/useRedeemsDispatch";
 import { Box, FormGroup, FormLabel, TextField } from "@mui/material";
 import { useState } from "react";
 
@@ -5,6 +6,20 @@ export default function ShiptmentsPersonalData() {
   const [name, setName] = useState('')
   const [cpf, setCpf] = useState('')
   const [email, setEmail] = useState('')
+
+  const redeemsDispatch = useRedeemsDispatch()
+
+  const handleRedeemChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, eventCallback: Function) => {
+    eventCallback(event.target.value);
+
+    redeemsDispatch({
+      type: 'updated',
+      data: {
+        [event.target.name]: event.target.value,
+      },
+      field: event.target.name,
+    });
+  };
 
   return (
     <Box sx={{
@@ -28,27 +43,25 @@ export default function ShiptmentsPersonalData() {
         <TextField
           id="name"
           label="Nome"
+          name="name"
           value={name}
           variant="standard"
           sx={{
             gridColumn: '1 / 3',
           }}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setName(event.target.value);
-          }}
+          onChange={e => handleRedeemChange(e, setName)}
           required
         />
         <TextField
           id="cpf"
           label="CPF ou CNPJ"
+          name="cpf"
           value={cpf}
           variant="standard"
           sx={{
             gridColumn: '1 / 2',
           }}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setCpf(event.target.value);
-          }}
+          onChange={e => handleRedeemChange(e, setCpf)}
           required
         />
         <TextField
@@ -56,14 +69,13 @@ export default function ShiptmentsPersonalData() {
           label="Email"
           value={email}
           type="email"
+          name="email"
           variant="standard"
           sx={{
             gridColumn: '2 / 3',
           }}
           defaultValue="Normal"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setEmail(event.target.value);
-          }}
+          onChange={e => handleRedeemChange(e, setEmail)}
           required
         />
       </FormGroup>
