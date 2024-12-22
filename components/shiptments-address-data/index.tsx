@@ -1,5 +1,9 @@
+import { useContext, useState } from "react";
 import { Box, FormControl, FormGroup, FormLabel, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
-import { useState } from "react";
+import { CountriesContext } from "@/contexts/countries-context";
+import { StatesContext } from "@/contexts/states-context";
+import useCountriesDispatch from "@/hooks/useContriesDispatch";
+import useStatesDispatch from "@/hooks/useStatesDispatch";
 
 export default function ShiptmentsPersonalData() {
   const [cep, setCep] = useState('')
@@ -11,12 +15,32 @@ export default function ShiptmentsPersonalData() {
   const [state, setState] = useState('')
   const [country, setCounty] = useState('')
 
+  const countries = useContext(CountriesContext)
+  const countriesDispatch = useCountriesDispatch()
+
+  const states = useContext(StatesContext)
+  const statesDispatch = useStatesDispatch()
+
   const handleStateChange = (event: SelectChangeEvent) => {
     setState(event.target.value);
+
+    statesDispatch({
+      type: 'changed',
+      data: {
+        state: event.target.value,
+      }
+    });
   };
 
   const handleCountryChange = (event: SelectChangeEvent) => {
-    setCounty(event.target.value);
+    setCounty(event.target.value)
+
+    countriesDispatch({
+      type: 'changed',
+      data: {
+        country: event.target.value,
+      }
+    });
   };
 
   return (
@@ -130,12 +154,11 @@ export default function ShiptmentsPersonalData() {
             onChange={handleStateChange}
             label="Estado"
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            {
+              states?.states.map((state) => (
+                <MenuItem key={state} value={state}>{state}</MenuItem>
+              ))
+            }
           </Select>
         </FormControl>
 
@@ -154,12 +177,11 @@ export default function ShiptmentsPersonalData() {
             label="País"
             required
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            {
+              countries?.countries.map((country) => (
+                <MenuItem key={country} value={country}>{country}</MenuItem>
+              ))
+            }
           </Select>
         </FormControl>
       </FormGroup>
