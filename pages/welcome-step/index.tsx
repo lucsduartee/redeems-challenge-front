@@ -25,7 +25,9 @@ export default function WelcomeStep() {
 
         <Button
           variant="contained"
-          className={styles.welcomeStepButton}
+          sx={{
+            backgroundColor: '#22007F'
+          }}
         >
           Começar!
         </Button>
