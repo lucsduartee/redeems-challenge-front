@@ -4,6 +4,15 @@ Acesse a aplicação em produção no link: [https://redeems-challenge-front.ver
 
 ## Subindo o projeto (Sem Docker)
 
+### 1. Clonar o Repositório
+Primeiro, clone o repositório do projeto para sua máquina local:
+
+```bash
+git clone https://github.com/lucsduartee/redeems-challenge-front
+cd redeems-challenge-front
+npm install
+```
+
 ```bash
 npm run dev
 # or
