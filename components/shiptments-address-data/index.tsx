@@ -4,6 +4,7 @@ import { CountriesContext } from "@/contexts/countries-context";
 import { StatesContext } from "@/contexts/states-context";
 import useCountriesDispatch from "@/hooks/useContriesDispatch";
 import useStatesDispatch from "@/hooks/useStatesDispatch";
+import useRedeemsDispatch from "@/hooks/useRedeemsDispatch";
 
 export default function ShiptmentsPersonalData() {
   const [cep, setCep] = useState('')
@@ -13,33 +14,23 @@ export default function ShiptmentsPersonalData() {
   const [neighborhood, setNeighborhood] = useState('')
   const [city, setCity] = useState('')
   const [state, setState] = useState('')
-  const [country, setCounty] = useState('')
+  const [country, setCountry] = useState('')
 
   const countries = useContext(CountriesContext)
-  const countriesDispatch = useCountriesDispatch()
 
   const states = useContext(StatesContext)
-  const statesDispatch = useStatesDispatch()
 
-  const handleStateChange = (event: SelectChangeEvent) => {
-    setState(event.target.value);
+  const redeemsDispatch = useRedeemsDispatch()
 
-    statesDispatch({
-      type: 'changed',
+  const handleRedeemChange = (event: SelectChangeEvent | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, eventCallback: Function) => {
+    eventCallback(event.target.value);
+
+    redeemsDispatch({
+      type: 'updated',
       data: {
-        state: event.target.value,
-      }
-    });
-  };
-
-  const handleCountryChange = (event: SelectChangeEvent) => {
-    setCounty(event.target.value)
-
-    countriesDispatch({
-      type: 'changed',
-      data: {
-        country: event.target.value,
-      }
+        [event.target.name]: event.target.value,
+      },
+      field: event.target.name,
     });
   };
 
@@ -66,13 +57,12 @@ export default function ShiptmentsPersonalData() {
           id="cep"
           label="CEP"
           value={cep}
+          name="cep"
           variant="standard"
           sx={{
             gridColumn: '1 / 3',
           }}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setCep(event.target.value);
-          }}
+          onChange={(e) => handleRedeemChange(e, setCep)}
           required
         />
         <TextField
@@ -80,25 +70,23 @@ export default function ShiptmentsPersonalData() {
           label="Rua"
           value={street}
           variant="standard"
+          name="street"
           sx={{
             gridColumn: '3 / 5',
           }}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setStreet(event.target.value);
-          }}
+          onChange={(e) => handleRedeemChange(e, setStreet)}
           required
         />
         <TextField
           id="adressNumber"
           label="Número"
           value={adressNumber}
+          name="adressNumber"
           variant="standard"
           sx={{
             gridColumn: '1 / 2',
           }}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setAdressNumber(event.target.value);
-          }}
+          onChange={(e) => handleRedeemChange(e, setAdressNumber)}
           required
         />
         <TextField
@@ -106,38 +94,35 @@ export default function ShiptmentsPersonalData() {
           label="Complemento"
           value={complement}
           variant="standard"
+          name="complement"
           sx={{
             gridColumn: '2 / 3',
           }}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setComplement(event.target.value);
-          }}
+          onChange={(e) => handleRedeemChange(e, setComplement)}          
         />
         <TextField
           id="neighborhood"
           label="Bairro"
           value={neighborhood}
           variant="standard"
+          name="neighborhood"
           sx={{
             gridColumn: '3 / 5',
           }}
           defaultValue="Normal"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setNeighborhood(event.target.value);
-          }}
+          onChange={(e) => handleRedeemChange(e, setNeighborhood)}
           required
         />
         <TextField
           id="city"
           label="Cidade"
           value={city}
+          name="city"
           variant="standard"
           sx={{
             gridColumn: '1 / 3',
           }}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setCity(event.target.value);
-          }}
+          onChange={(e) => handleRedeemChange(e, setCity)}
           required
         />
         <FormControl
@@ -150,8 +135,9 @@ export default function ShiptmentsPersonalData() {
           <Select
             labelId="state-label"
             id="state"
+            name="state"
             value={state}
-            onChange={handleStateChange}
+            onChange={(e) => handleRedeemChange(e, setState)}
             label="Estado"
           >
             {
@@ -173,7 +159,8 @@ export default function ShiptmentsPersonalData() {
             labelId="country-label"
             id="country"
             value={country}
-            onChange={handleCountryChange}
+            name="country"
+            onChange={(e) => handleRedeemChange(e, setCountry) }
             label="País"
             required
           >

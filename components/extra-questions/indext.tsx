@@ -1,8 +1,23 @@
+import useRedeemsDispatch from "@/hooks/useRedeemsDispatch";
 import { Box, FormGroup, FormLabel, TextField } from "@mui/material";
 import { useState } from "react";
 
 export default function ExtraQuestions() {
   const [question, setQuestion] = useState('')
+
+  const redeemsDispatch = useRedeemsDispatch()
+
+  const handleRedeemChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, eventCallback: Function) => {
+    eventCallback(event.target.value);
+
+    redeemsDispatch({
+      type: 'updated',
+      data: {
+        [event.target.name]: event.target.value,
+      },
+      field: event.target.name,
+    });
+  };
 
   return (
     <Box sx={{
@@ -31,9 +46,7 @@ export default function ExtraQuestions() {
           sx={{
             gridColumn: '1 / 2',
           }}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setQuestion(event.target.value);
-          }}
+          onChange={(e) => handleRedeemChange(e, setQuestion)}
           required
         />
       </FormGroup>
