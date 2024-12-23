@@ -1,5 +1,5 @@
 .welcomeStepContainer {
-  padding: 200px;
+  padding: 120px;
   background-color: #EFF6FF;
 }
 
@@ -16,7 +16,7 @@
 
 .welcomeStepTitle {
   color: #353535;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 600;
 }
 

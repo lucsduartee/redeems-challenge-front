@@ -22,13 +22,15 @@ export default function ShiptmentsPersonalData() {
   };
 
   return (
-    <Box sx={{
-      display: 'flex',
-      width: '100%',
-      flexDirection: 'column',
-      gap: '16px',
-      marginBottom: '12px'
-    }}>
+    <Box
+      sx={{
+        display: 'flex',
+        width: '100%',
+        flexDirection: 'column',
+        gap: '16px',
+        marginBottom: '12px'
+      }}
+    >
       <FormLabel sx={{ fontWeight: 600, marginBottom: '12px' }}>Dados do destinatário</FormLabel>
 
       <FormGroup
@@ -36,8 +38,11 @@ export default function ShiptmentsPersonalData() {
           display: 'grid',
           width: '100%',
           gap: '16px',
-          gridTemplateColumns: 'repeat(2, 1fr)',
+          gridTemplateColumns: '1fr',
           gridTemplateRows: 'auto',
+          '@media (min-width: 960px)': {
+            gridTemplateColumns: 'repeat(2, 1fr)',
+          },
         }}
       >
         <TextField
@@ -47,7 +52,10 @@ export default function ShiptmentsPersonalData() {
           value={name}
           variant="standard"
           sx={{
-            gridColumn: '1 / 3',
+            gridColumn: {
+              xs: '1 / -1',
+              sm: '1 / 3',
+            },
           }}
           onChange={e => handleRedeemChange(e, setName)}
           required
@@ -59,7 +67,10 @@ export default function ShiptmentsPersonalData() {
           value={cpf}
           variant="standard"
           sx={{
-            gridColumn: '1 / 2',
+            gridColumn: {
+              xs: '1 / -1',
+              sm: '1 / 2',
+            },
           }}
           onChange={e => handleRedeemChange(e, setCpf)}
           required
@@ -71,7 +82,10 @@ export default function ShiptmentsPersonalData() {
           value={email}
           variant="standard"
           sx={{
-            gridColumn: '2 / 3',
+            gridColumn: {
+              xs: '1 / -1',
+              sm: '2 / 3',
+            },
           }}
           onChange={e => handleRedeemChange(e, setEmail)}
           required

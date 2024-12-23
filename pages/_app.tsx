@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <StatesProvider>
         <CountriesProvider>
           <RedeemsProvider>
-            <Component {...pageProps} />;
+            <Component {...pageProps} />
           </RedeemsProvider>
         </CountriesProvider>
       </StatesProvider>

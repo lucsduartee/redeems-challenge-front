@@ -36,13 +36,18 @@ export default function ExtraQuestions() {
         sx={{
           display: 'grid',
           width: '100%',
-          gap: '20px',
-          gridTemplateColumns: 'repeat(2, 1fr)',
+          gap: '16px',
+          gridTemplateColumns: '1fr',
           gridTemplateRows: 'auto',
+          '@media (min-width: 960px)': {
+            gridTemplateColumns: 'repeat(2, 1fr)',
+          },
         }}
       >
         {
-          redeemPage?.extra_questions.map((extraQuestion) => {
+          redeemPage?.extra_questions.map((extraQuestion, index) => {
+            const isOdd = index % 2 !== 0
+
             if (!(extraQuestion.answer_type === 'select_one')) {
               return (<TextField
                 id="size"
@@ -51,7 +56,10 @@ export default function ExtraQuestions() {
                 variant="standard"
                 name="extraQuestions"
                 sx={{
-                  width: '100%'
+                  gridColumn: {
+                    xs: '1 / -1',
+                    sm: `${isOdd ? '2 / 3' : '1 / 2' }`,
+                  },
                 }}
                 key={extraQuestion.id}
                 onChange={(e) => handleRedeemChange(e, extraQuestion.id)}
@@ -63,7 +71,10 @@ export default function ExtraQuestions() {
               <FormControl
                 variant="standard"
                 sx={{
-                  width: '100%'
+                  gridColumn: {
+                    xs: '1 / -1',
+                    sm: `${isOdd ? '2 / 3' : '1 / 2' }`,
+                  },
                 }}
               >
                 <InputLabel required id="country-label">{extraQuestion.question}</InputLabel>

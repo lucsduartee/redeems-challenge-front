@@ -45,8 +45,11 @@ export default function ShiptmentsItemsData() {
           display: 'grid',
           width: '100%',
           gap: '16px',
-          gridTemplateColumns: 'repeat(2, 1fr)',
+          gridTemplateColumns: '1fr',
           gridTemplateRows: 'auto',
+          '@media (min-width: 960px)': {
+            gridTemplateColumns: 'repeat(2, 1fr)',
+          },
         }}
       >
         {
@@ -56,7 +59,10 @@ export default function ShiptmentsItemsData() {
               <FormControl
                 variant="standard"
                 sx={{
-                  gridColumn: '1 / 2',
+                  gridColumn: {
+                    xs: '1 / -1',
+                    sm: '1 / 2',
+                  },
                 }}
                 key={item.customer_product_id}
               >

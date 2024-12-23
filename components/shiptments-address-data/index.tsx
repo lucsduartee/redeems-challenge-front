@@ -49,8 +49,11 @@ export default function ShiptmentsPersonalData() {
           display: 'grid',
           width: '100%',
           gap: '16px',
-          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateColumns: '1fr',
           gridTemplateRows: 'auto',
+          '@media (min-width: 960px)': {
+            gridTemplateColumns: 'repeat(4, 1fr)',
+          },
         }}
       >
         <TextField
@@ -60,7 +63,10 @@ export default function ShiptmentsPersonalData() {
           name="cep"
           variant="standard"
           sx={{
-            gridColumn: '1 / 3',
+            gridColumn: {
+              xs: '1 / -1',
+              sm: '1 / 3',
+            },
           }}
           onChange={(e) => handleRedeemChange(e, setCep)}
           required
@@ -72,7 +78,10 @@ export default function ShiptmentsPersonalData() {
           variant="standard"
           name="street"
           sx={{
-            gridColumn: '3 / 5',
+            gridColumn: {
+              xs: '1 / -1',
+              sm: '3 / 5',
+            },
           }}
           onChange={(e) => handleRedeemChange(e, setStreet)}
           required
@@ -84,7 +93,10 @@ export default function ShiptmentsPersonalData() {
           name="adressNumber"
           variant="standard"
           sx={{
-            gridColumn: '1 / 2',
+            gridColumn: {
+              xs: '1 / -1',
+              sm: '1 / 2',
+            },
           }}
           onChange={(e) => handleRedeemChange(e, setAdressNumber)}
           required
@@ -96,9 +108,12 @@ export default function ShiptmentsPersonalData() {
           variant="standard"
           name="complement"
           sx={{
-            gridColumn: '2 / 3',
+            gridColumn: {
+              xs: '1 / -1',
+              sm: '2 / 3',
+            },
           }}
-          onChange={(e) => handleRedeemChange(e, setComplement)}          
+          onChange={(e) => handleRedeemChange(e, setComplement)}
         />
         <TextField
           id="neighborhood"
@@ -107,7 +122,10 @@ export default function ShiptmentsPersonalData() {
           variant="standard"
           name="neighborhood"
           sx={{
-            gridColumn: '3 / 5',
+            gridColumn: {
+              xs: '1 / -1',
+              sm: '3 / 5',
+            },
           }}
           onChange={(e) => handleRedeemChange(e, setNeighborhood)}
           required
@@ -119,7 +137,10 @@ export default function ShiptmentsPersonalData() {
           name="city"
           variant="standard"
           sx={{
-            gridColumn: '1 / 3',
+            gridColumn: {
+              xs: '1 / -1',
+              sm: '1 / 3',
+            },
           }}
           onChange={(e) => handleRedeemChange(e, setCity)}
           required
@@ -127,7 +148,10 @@ export default function ShiptmentsPersonalData() {
         <FormControl
           variant="standard"
           sx={{
-            gridColumn: '3 / 4',
+            gridColumn: {
+              xs: '1 / -1',
+              sm: '3 / 4',
+            },
           }}
         >
           <InputLabel required id="state-label">Estado</InputLabel>
@@ -150,7 +174,10 @@ export default function ShiptmentsPersonalData() {
         <FormControl
           variant="standard"
           sx={{
-            gridColumn: '4 / 5',
+            gridColumn: {
+              xs: '1 / -1',
+              sm: '4 / 5',
+            },
           }}
         >
           <InputLabel required id="country-label">País</InputLabel>
@@ -159,7 +186,7 @@ export default function ShiptmentsPersonalData() {
             id="country"
             value={country}
             name="country"
-            onChange={(e) => handleRedeemChange(e, setCountry) }
+            onChange={(e) => handleRedeemChange(e, setCountry)}
             label="País"
             required
           >
