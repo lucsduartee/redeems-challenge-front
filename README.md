@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
+Acesse a aplicação em produção no link: [https://redeems-challenge-front.vercel.app/welcome-step](https://redeems-challenge-front.vercel.app/)
+
 ## Subindo o projeto (Sem Docker)
 
 ```bash
