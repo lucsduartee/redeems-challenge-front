@@ -3,7 +3,7 @@ import React, { createContext, ReactNode, useReducer } from 'react'
 export interface ExtraQuestion {
   id: number,
   question: string,
-  answerType: string,
+  answer_type: string,
   options: Array<string>
 }
 
@@ -17,7 +17,7 @@ export interface SizeGrid {
 }
 
 export interface Item {
-  customerProductId: string,
+  customer_product_id: string,
   sizes: Array<Size>,
   sizes_grid: SizeGrid,
 }

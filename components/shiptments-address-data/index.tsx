@@ -109,7 +109,6 @@ export default function ShiptmentsPersonalData() {
           sx={{
             gridColumn: '3 / 5',
           }}
-          defaultValue="Normal"
           onChange={(e) => handleRedeemChange(e, setNeighborhood)}
           required
         />

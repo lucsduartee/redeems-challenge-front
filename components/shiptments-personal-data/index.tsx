@@ -67,14 +67,12 @@ export default function ShiptmentsPersonalData() {
         <TextField
           id="email"
           label="Email"
-          value={email}
-          type="email"
           name="email"
+          value={email}
           variant="standard"
           sx={{
             gridColumn: '2 / 3',
           }}
-          defaultValue="Normal"
           onChange={e => handleRedeemChange(e, setEmail)}
           required
         />

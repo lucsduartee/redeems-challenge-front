@@ -18,19 +18,18 @@ export default function ShiptmentsItemsData() {
 
   const redeemsDispatch = useRedeemsDispatch()
 
-  const handleRedeemChange = (event: SelectChangeEvent | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, eventCallback: Function) => {
-    eventCallback(event.target.value);
+  const handleRedeemChange = (event: SelectChangeEvent | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, id: string) => {
+    setSize(event.target.value)
 
     redeemsDispatch({
       type: 'updated',
       data: {
-        [event.target.name]: event.target.value,
+        size_name: event.target.value,
+        customer_product_id: id, 
       },
       field: event.target.name,
     });
   };
-
-  console.log(redeemPage?.items[0])
 
   return (
     <Box sx={{
@@ -59,14 +58,15 @@ export default function ShiptmentsItemsData() {
                 sx={{
                   gridColumn: '1 / 2',
                 }}
+                key={item.customer_product_id}
               >
                 <InputLabel required id="size-label">Qual seu tamanho? ({item.sizes_grid.name})</InputLabel>
                 <Select
                   labelId="size-label"
                   id="size"
                   value={size}
-                  name="size"
-                  onChange={(e => handleRedeemChange(e, setSize))}
+                  name="items"
+                  onChange={(e => handleRedeemChange(e, item.customer_product_id))}
                   label="Tamanho"
                 >
                   {

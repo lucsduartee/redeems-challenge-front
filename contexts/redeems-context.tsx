@@ -1,13 +1,11 @@
 import React, { createContext, ReactNode, useReducer } from 'react'
 
 export interface ExtraQuestion {
-  extraQuestionId: number;
-  answer: string;
+  [x: number]: { answer: string }
 }
 
 export interface Item {
-  customerProductId: number;
-  sizeName: string;
+  [x: string]: { size_name: string; }  
 }
 
 export interface Redeems {
@@ -23,8 +21,8 @@ export interface Redeems {
   state: string;
   country: string;
   size: string;
-  items?: Array<Item>
-  extraQuestions?: Array<ExtraQuestion>;
+  items?: Item
+  extraQuestions?: ExtraQuestion;
 }
 
 export interface RedeemActions {
@@ -54,8 +52,8 @@ const initialRedeems = {
   state: '',
   country: '',
   size: '',
-  items: [],
-  extraQuestions: [],
+  items: {},
+  extraQuestions: {},
 };
 
 function redeemsReducer(
@@ -67,19 +65,23 @@ function redeemsReducer(
       if (action.field === 'extraQuestions') {
         return {
           ...redeems,
-          extraQuestions: [
-            ...(redeems?.extraQuestions ?? []),
-            action.data,
-          ],
+          extraQuestions: {
+            ...(redeems?.extraQuestions ?? {}),            
+              [action.data.extra_question_id]: {
+                answer: action.data.answer
+              },
+          },
         }
       }
-      if (action.data.field === 'items') {
+      if (action.field === 'items') {
         return {
           ...redeems,
-          items: [
-            ...(redeems?.items ?? []),
-            action.data,
-          ],
+          items: {
+            ...(redeems?.items ?? {}),
+            [action.data.customer_product_id]: {
+              size_name: action.data.size_name,
+            },
+          }
         }
       }
 
