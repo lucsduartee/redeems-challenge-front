@@ -1,8 +1,6 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
-## Getting Started
-
-First, run the development server:
+## Subindo o projeto (Sem Docker)
 
 ```bash
 npm run dev
@@ -14,27 +12,36 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000) no seu browser para ver o resultado.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Subindo o projeto (Com Docker)
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Este projeto é uma aplicação Next.js configurada para ser executada dentro de um container Docker.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## Pré-requisitos
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Antes de começar, verifique se você tem as seguintes ferramentas instaladas:
+- **Docker**: [Download Docker](https://www.docker.com/get-started)
+- **Docker Compose**: [Download Docker Compose](https://docs.docker.com/compose/install/)
 
-## Learn More
+## Rodando a Aplicação com Docker
 
-To learn more about Next.js, take a look at the following resources:
+### 1. Clonar o Repositório
+Primeiro, clone o repositório do projeto para sua máquina local:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+```bash
+git clone https://github.com/lucsduartee/redeems-challenge-front
+cd redeems-challenge-front
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 2. Criar as Imagens e Iniciar o Container
+Use o docker-compose para construir e iniciar a aplicação:
 
-## Deploy on Vercel
+```bash
+docker-compose up --build
+```
+Acesse a aplicação em:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+```bash
+http://localhost:3000
+```
