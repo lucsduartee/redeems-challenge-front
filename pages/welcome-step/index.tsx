@@ -2,8 +2,45 @@ import Image from "next/image"
 import styles from './styles.module.css'
 import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
+import { useContext, useEffect, useState } from "react"
+import useRedeemPageDispatch from "@/hooks/useRedeemPageDispatch"
+import { RedeemPageContext } from "@/contexts/redeem-page-context"
+import { useRouter } from "next/router"
 
 export default function WelcomeStep() {
+  const [isLoading, setIsLoading] = useState<boolean>()
+  const router = useRouter()
+  const redeemPage = useContext(RedeemPageContext)
+  const dispatch = useRedeemPageDispatch()
+
+  const redeemPageIsActive = redeemPage?.status
+
+  useEffect(() => {
+    (async function fetchRedeemPage() {
+      setIsLoading(true)
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_LOBBY_API_HOST}/api/v1/redeem_pages`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Basic ${process.env.NEXT_PUBLIC_LOBBY_API_KEY}`
+        }
+      })
+
+      const data = await response.json()
+      const redeemPage = data.find((redeemPage: any) => redeemPage.status === 'ACTIVE')
+
+      dispatch({
+        type: 'saved',
+        data: {
+          redeemPage,
+        }
+      })
+
+      setIsLoading(false)
+    })()
+  }, [])
+
   return (
     <Box component="section" className={styles.welcomeStepContainer}>
       <Box className={styles.welcomeStepMain}>
@@ -28,8 +65,10 @@ export default function WelcomeStep() {
           sx={{
             backgroundColor: '#22007F'
           }}
+          disabled={isLoading || !redeemPageIsActive}
+          onClick={() => router.push(`/redeem-step/${redeemPage?.id}`)}
         >
-          Começar!
+          {redeemPageIsActive ? 'Começar' : 'Resgate indisponível' }
         </Button>
 
         <div className={styles.welcomeStepFooter}>
