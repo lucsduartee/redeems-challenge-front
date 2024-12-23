@@ -69,6 +69,7 @@ export default function ExtraQuestions() {
 
             return (
               <FormControl
+                key={extraQuestion.id}
                 variant="standard"
                 sx={{
                   gridColumn: {

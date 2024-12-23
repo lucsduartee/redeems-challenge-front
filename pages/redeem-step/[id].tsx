@@ -59,6 +59,7 @@ export default function RedeemStep() {
       redeemer_state: redeem?.state,
       redeemer_country: redeem?.country,
       redeemer_phone: redeem?.size,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       extra_question_responses: Object.keys(redeem?.extraQuestions ?? {}).map((key: any) => ({
         extra_question_id: key,
         answer: redeem?.extraQuestions?.[key]?.answer,

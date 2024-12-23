@@ -9,6 +9,7 @@ export default function ShiptmentsPersonalData() {
 
   const redeemsDispatch = useRedeemsDispatch()
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   const handleRedeemChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, eventCallback: Function) => {
     eventCallback(event.target.value);
 

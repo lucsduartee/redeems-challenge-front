@@ -28,6 +28,7 @@ export default function WelcomeStep() {
       })
 
       const data = await response.json()
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const redeemPage = data.find((redeemPage: any) => redeemPage.status === 'ACTIVE')
 
       dispatch({

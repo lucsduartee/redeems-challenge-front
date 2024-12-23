@@ -2,8 +2,6 @@ import { useContext, useState } from "react";
 import { Box, FormControl, FormGroup, FormLabel, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 import { CountriesContext } from "@/contexts/countries-context";
 import { StatesContext } from "@/contexts/states-context";
-import useCountriesDispatch from "@/hooks/useContriesDispatch";
-import useStatesDispatch from "@/hooks/useStatesDispatch";
 import useRedeemsDispatch from "@/hooks/useRedeemsDispatch";
 
 export default function ShiptmentsPersonalData() {
@@ -22,6 +20,7 @@ export default function ShiptmentsPersonalData() {
 
   const redeemsDispatch = useRedeemsDispatch()
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   const handleRedeemChange = (event: SelectChangeEvent | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, eventCallback: Function) => {
     eventCallback(event.target.value);
 
